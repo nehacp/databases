@@ -3,24 +3,32 @@ var db = require('../db');
 module.exports = {
   messages: {
     get: function (callback) {
-      db.query('SELECT * FROM messages', callback);
-    }, // a function which produces all the messages
+      // if (!db.Messages) {
+      //   callback([]);
+      // }
+
+      db.Messages.findAll()
+      .then((result) => callback(null, result))
+      .catch((err) => callback(err));
+    },
+
     post: function (message, callback) {
-      //let query = 'INSERT INTO messages ('"message"') VALUES (' + message.message + ')'
-      db.query(`INSERT INTO messages (message, username, roomname) VALUES ("${message.message}",
-               "${message.username}", "${message.roomname}")`, callback);
-    } // a function which can be used to insert a message into the database
+      db.Messages.sync().then(() => db.Messages.create(message))
+      .then((result) => {
+        callback(null, result);
+      })
+      .catch((err) => {
+        callback(err);
+      });
+    }
   },
 
   users: {
     // Ditto as above.
     get: function () {},
     post: function (username, callback) {
-      db.query('INSERT INTO usernames (name) VALUES ("' + username + '")', callback);
+      db.db.query('INSERT INTO usernames (name) VALUES ("' + username + '")', callback);
 
     }
   }
 };
-
-
-//'INSERT INTO messages (message, username, roomname) VALUES ("' + message.message + '")'

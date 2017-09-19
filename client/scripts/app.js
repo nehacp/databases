@@ -45,9 +45,7 @@ var app = {
       data: JSON.stringify(message),
       contentType: 'application/json',
       success: function (data) {
-        // Clear messages input
         app.$message.val('');
-
         // Trigger a fetch to update the messages, pass true to animate
         app.fetch();
       },
@@ -70,21 +68,18 @@ var app = {
          // app.stopSpinner();
           return; 
         }
-
         // Store messages for caching later
         app.messages = data.results;
-        console.log('DATA RECEIVED', data);
-
         // Get the last message
         var mostRecentMessage = data.results[data.results.length - 1];
 
         // Only bother updating the DOM if we have a new message
         // if (mostRecentMessage.objectId !== app.lastMessageId) {
           // Update the UI with the fetched rooms
-          app.renderRoomList(data.results);
+        app.renderRoomList(data.results);
 
           // Update the UI with the fetched messages
-          app.renderMessages(data.results, animate);
+        app.renderMessages(data.results, animate);
 
           // Store the ID of the most recent message
           // app.lastMessageId = mostRecentMessage.objectId;

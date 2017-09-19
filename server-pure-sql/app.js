@@ -10,8 +10,6 @@ var router = require('./routes.js');
 
 // begin running database
 //db.connect();
-// db.db.drop({}).then((result) => console.log('Deleted all tables', result))
-// .catch((err) => console.log('Failed to delete table', err));
 
 var app = express();
 module.exports.app = app;

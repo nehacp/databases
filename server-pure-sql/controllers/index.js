@@ -5,26 +5,32 @@ module.exports = {
     get: function (req, res) {
       models.messages.get((err, results, fields) => {
         if (err) {
-          console.log('GET request error', err);
+          console.log('db message GET error', err);
         } else {
-          let responseBody = {};
-          responseBody.results = results;
+          console.log('db message GET results', results);
           res.status(200);
-          res.send(JSON.stringify(responseBody));
+          let obj = {
+            results: results
+          };
+          res.send(JSON.stringify(obj));
         }
       });
 
-    },
+    }, // a function which handles a get request for all messages
     post: function (req, res) {
       models.messages.post(req.body, function(err, result) {
         if (err) {
-          console.log('POST request error', err);
+          console.log('db message insertion error', err);
         } else {
+          console.log('db message results', result);
           res.status(200);
-          res.send(result.dataValues);
+          res.send('message inserted');
         }
       });
-    }
+    
+
+
+    } // a function which handles posting a message to the database
   },
 
   users: {
