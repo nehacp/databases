@@ -8,7 +8,8 @@ CREATE TABLE messages (
   /* Describe your table here.*/
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
   message VARCHAR(144),
-  roomname VARCHAR(20)
+  roomname VARCHAR(20),
+  username VARCHAR(20)
   /* createdAt DATE,
   -- id_usernames INTEGER,
   -- id_roomnames INTEGER*/
