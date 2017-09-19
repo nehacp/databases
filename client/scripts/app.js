@@ -24,7 +24,7 @@ var app = {
     app.$chats.on('click', '.username', app.handleUsernameClick);
     app.$send.on('submit', app.handleSubmit);
     app.$roomSelect.on('change', app.handleRoomChange);
-
+    app.handleUsername();
     // Fetch previous messages
     //app.startSpinner();
     app.fetch(false);
@@ -35,12 +35,12 @@ var app = {
     // }, 3000);
   },
 
-  send: function(message) {
+  send: function(message, url) {
    // app.startSpinner();
 
     // POST the message to the server
     $.ajax({
-      url: 'http://127.0.0.1:3000/classes/messages',
+      'url': url,
       type: 'POST',
       data: JSON.stringify(message),
       contentType: 'application/json',
@@ -219,11 +219,19 @@ var app = {
       roomname: app.roomname || 'lobby'
     };
 
-    app.send(message);
+    app.send(message, app.server);
 
     // Stop the form from submitting
     event.preventDefault();
   },
+
+  handleUsername: function () {
+    let user = {
+      username: app.username
+    };
+    app.send(user, 'http://127.0.0.1:3000/classes/users');
+  
+  }
 
   // startSpinner: function() {
   //   $('.spinner img').show();

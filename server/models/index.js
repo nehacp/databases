@@ -13,22 +13,27 @@ module.exports = {
     },
 
     post: function (message, callback) {
-      db.Messages.sync().then(() => db.Messages.create(message))
-      .then((result) => {
-        callback(null, result);
-      })
-      .catch((err) => {
-        callback(err);
-      });
+      // let userId;
+      db.Users.sync().then(() => db.Users.findOne({
+        where: {'username': message.username}
+      })).then((result) => message.UserId = result.dataValues.id)
+      .then(() => db.Messages.create(message))
+      .then((result) => callback(null, result))
+      .catch((err) => callback(err));
     }
   },
 
   users: {
     // Ditto as above.
     get: function () {},
-    post: function (username, callback) {
-      db.db.query('INSERT INTO usernames (name) VALUES ("' + username + '")', callback);
-
+    post: function (user, callback) {
+      db.Users.sync().then(() => db.Users.create(user))
+      .then((result) => {
+        callback(null, result);
+      })
+      .catch((err) => {
+        callback(err);
+      });
     }
   }
 };

@@ -38,19 +38,26 @@ var db = new Sequelize('chat', 'root', 'plantlife');
 //   username: Sequelize.STRING
 // });
 
-
+var Users = db.define('Users', {
+  username: {
+    type: Sequelize.STRING, unique: true }  
+});
 
 
 var Messages = db.define('Messages', {
-  username: Sequelize.STRING,
-  message: Sequelize.TEXT,
-  roomname: Sequelize.STRING
+  //username: Sequelize.STRING,
+  message: Sequelize.TEXT
+  //roomname: Sequelize.STRING
 });
+
+Users.hasMany(Messages);
+Messages.belongsTo(Users);
 
 /* Sequelize comes with built in support for promises
  * making it easy to chain asynchronous operations together */
 
 module.exports = {
   db: db,
-  Messages: Messages
+  Messages: Messages,
+  Users: Users
 };

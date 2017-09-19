@@ -32,11 +32,11 @@ module.exports = {
     get: function (req, res) {},
     post: function (req, res) {
 
-      models.users.post(req.body.username, function(err, result) {
+      models.users.post(req.body, function(err, result) {
         if (err) {
           console.log('db username insertion error', err);
         } else {
-          console.log('db username results', result);
+          // console.log('db username results', result);
           res.status(200);
           res.send('username inserted');
         }
