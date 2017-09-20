@@ -24,7 +24,7 @@ var app = {
     app.$chats.on('click', '.username', app.handleUsernameClick);
     app.$send.on('submit', app.handleSubmit);
     app.$roomSelect.on('change', app.handleRoomChange);
-    app.handleUsername();
+    // app.handleUsername();
     // Fetch previous messages
     //app.startSpinner();
     app.fetch(false);

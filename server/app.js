@@ -10,7 +10,7 @@ var router = require('./routes.js');
 
 // begin running database
 //db.connect();
-// db.db.drop({}).then((result) => console.log('Deleted all tables', result))
+// db.db.drop().then((result) => console.log('Deleted all tables', result))
 // .catch((err) => console.log('Failed to delete table', err));
 
 var app = express();
@@ -35,3 +35,17 @@ if (!module.parent) {
   console.log('Listening on', app.get('port'));
 }
 
+
+     // db.Messages.findAll().then((results) => {
+      //   console.log('received get request results', results);
+      //   results.forEach(message => {
+      //     db.Users.findOne({where: {id: message.dataValues.UserId }})
+      //     .then(function (result) {
+      //       message.dataValues.username = result.dataValues.username;
+      //     }).catch((err) => console.log('Received Error when getting one user!', err));
+      //   });
+      // })
+      // .then(function () {
+      //   callback(null, results);
+      // })
+      // .catch((err) => callback(err));

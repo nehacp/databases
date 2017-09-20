@@ -40,7 +40,8 @@ var db = new Sequelize('chat', 'root', 'plantlife');
 
 var Users = db.define('Users', {
   username: {
-    type: Sequelize.STRING, unique: true }  
+    type: Sequelize.STRING, unique: true 
+  }  
 });
 
 
@@ -59,5 +60,6 @@ Messages.belongsTo(Users);
 module.exports = {
   db: db,
   Messages: Messages,
-  Users: Users
+  Users: Users,
+  Sequelize: Sequelize
 };
